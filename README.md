@@ -1,70 +1,159 @@
-# Getting Started with Create React App
-<!-- "dev": "concurrently -n \"client, server\" -c \"bgBlue, bgRed\" \"npm start\" \"npm run server\"" -->
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**StudyNotion: Online Education Platform (MERN Stack)**
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Project Overview**
+StudyNotion is a fully functional ed-tech platform designed to enable users to create, consume, and rate educational content. Developed using the MERN stack (MongoDB, Express.js, React.js, and Node.js), StudyNotion aims to:
 
-### `npm start`
+- Provide an interactive and seamless learning experience for students.
+- Offer a platform for instructors to share knowledge and engage with learners worldwide.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The following sections provide a technical breakdown of the platform, covering architecture, front-end and back-end functionalities, API design, deployment, and future enhancements.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## **System Architecture**
+StudyNotion follows a client-server architecture, where the front end serves as the client and the back end (server) interacts with the database. The system comprises three main components:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### **1. Front End**
+- Built with React.js to ensure a dynamic and responsive UI.
+- Communicates with the backend via RESTful API calls.
+- State management using Redux.
+- Styling with CSS and Tailwind.
 
-### `npm run build`
+### **2. Back End**
+- Built using Node.js and Express.js.
+- Handles API requests, user authentication, course management, and media handling.
+- Implements JWT-based authentication and security features.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### **3. Database**
+- Utilizes MongoDB, a NoSQL database, to store user and course data.
+- Implements flexible data storage to manage structured and semi-structured data.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**System Architecture Diagram:**
+![System Architecture](https://example.com/system-architecture-diagram.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## **Front End Features**
+StudyNotion provides essential pages and features for different user roles:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### **For Students:**
+- **Homepage:** Introduction to the platform with course recommendations.
+- **Course List:** Displays all available courses with descriptions and ratings.
+- **Wishlist:** Allows students to save courses for later.
+- **Cart & Checkout:** Secure course purchase system with payment integration.
+- **Course Content:** Video lectures and study material.
+- **User Profile & Edit Page:** Manage student account details.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### **For Instructors:**
+- **Dashboard:** Overview of instructor-created courses and performance.
+- **Course Management:** Create, update, and manage course content.
+- **Insights:** View engagement metrics and student feedback.
+- **Profile Management:** Edit and update instructor details.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### **For Admins (Future Scope):**
+- **Dashboard:** Overview of platform performance.
+- **User & Course Management:** Monitor instructors, students, and content.
+- **Platform Insights:** Track key metrics such as revenue and user engagement.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Front End Workflow Diagram:**
+![Front End Workflow](https://example.com/front-end-diagram.png)
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## **Back End Features**
+The back-end architecture follows a monolithic approach with robust security and scalable data handling.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### **Core Functionalities:**
+- **User Authentication & Authorization:** JWT-based authentication with OTP verification and password reset.
+- **Course Management:** Instructors can create, edit, and delete courses.
+- **Payment Integration:** Secure transactions via Razorpay.
+- **Media Handling:** Cloudinary is used for storing and managing course content.
+- **Data Security:** Bcrypt for password hashing.
 
-### Code Splitting
+### **Key Technologies Used:**
+- **Node.js** for the backend server.
+- **MongoDB** as the primary database.
+- **Express.js** for handling API routes.
+- **JWT** for authentication.
+- **Mongoose** for database interaction.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Database Schema Diagram:**
+![Database Schema](https://example.com/database-schema.png)
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## **API Design**
+The StudyNotion API follows the REST architectural style with standard HTTP request methods (GET, POST, PUT, DELETE). JSON is used for data exchange.
 
-### Making a Progressive Web App
+### **Key API Endpoints:**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Authentication:**
+- `POST /api/auth/signup` - Register a new user.
+- `POST /api/auth/login` - User login and JWT generation.
+- `POST /api/auth/verify-otp` - OTP verification.
+- `POST /api/auth/forgot-password` - Password reset process.
 
-### Advanced Configuration
+**Course Management:**
+- `GET /api/courses` - Retrieve all courses.
+- `GET /api/courses/:id` - Fetch details of a specific course.
+- `POST /api/courses` - Create a new course.
+- `PUT /api/courses/:id` - Update an existing course.
+- `DELETE /api/courses/:id` - Remove a course.
+- `POST /api/courses/:id/rate` - Add course ratings.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Sample API Request & Response:**
+```json
+GET /api/courses
+Response:
+{
+  "courses": [
+    {
+      "id": "123",
+      "name": "React for Beginners",
+      "description": "Learn React from scratch",
+      "rating": 4.8
+    }
+  ]
+}
+```
 
-### Deployment
+**API Architecture Diagram:**
+![API Architecture](https://example.com/api-architecture.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## **Deployment & Hosting**
+StudyNotion is deployed in a cloud-based environment to ensure scalability and high availability.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Front End:** Hosted on Vercel or Netlify.
+- **Back End:** Deployed on AWS EC2 or Render.
+- **Database:** Hosted on MongoDB Atlas.
+- **Media Storage:** Cloudinary for optimized media delivery.
+
+**Deployment Workflow Diagram:**
+![Deployment Workflow](https://example.com/deployment-diagram.png)
+
+---
+
+## **Testing & Future Enhancements**
+
+### **Testing Strategy:**
+- **Unit Testing:** Using Jest and Mocha.
+- **Integration Testing:** API validation with Postman.
+- **UI Testing:** Cypress for front-end testing.
+
+### **Future Enhancements:**
+- **Live Class Integration:** Add real-time video conferencing for instructors.
+- **AI-based Recommendations:** Personalized course suggestions.
+- **Mobile App Development:** Extend StudyNotion to iOS and Android.
+- **Gamification Elements:** Introduce quizzes and badges to boost engagement.
+
+---
+
+## **Conclusion**
+StudyNotion is a dynamic ed-tech platform built with the MERN stack to provide an interactive and seamless learning experience. With features like instructor-led courses, secure payment integration, and a user-friendly interface, the platform is designed to empower both learners and educators. Future updates will focus on expanding functionality and improving user engagement.
+
+---
+
